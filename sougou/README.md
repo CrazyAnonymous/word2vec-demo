@@ -27,3 +27,8 @@ model = Word2Vec.load('corpus.model')
 result = model.most_similar(u'妹纸')
 print(result)
 ~~~
+
+5、训练好的Word2Vec模型
+~~~
+链接：https://pan.baidu.com/s/1geBmkbL 密码：zj1p
+~~~
