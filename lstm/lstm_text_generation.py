@@ -9,6 +9,8 @@ has at least ~100k characters. ~1M is better.
 '''
 
 from __future__ import print_function
+
+import jieba
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.layers import LSTM
@@ -24,9 +26,15 @@ import io
 path = get_file('C:/Workbench/Python/word2vec-demo/lstm/data/Jane_eyer.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
 
 text = io.open(path, encoding='utf-8').read().lower()
-print('corpus length:', len(text))
+cuted_text = jieba.cut(text)
+text_arr = []
 
-chars = sorted(list(set(text)))
+for t in cuted_text:
+    text_arr.append(t)
+
+print('corpus length:', len(text_arr))
+
+chars = sorted(list(set(text_arr)))
 print('total chars:', len(chars))
 char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
@@ -36,9 +44,9 @@ maxlen = 40
 step = 3
 sentences = []
 next_chars = []
-for i in range(0, len(text) - maxlen, step):
-    sentences.append(text[i: i + maxlen])
-    next_chars.append(text[i + maxlen])
+for i in range(0, len(text_arr) - maxlen, step):
+    sentences.append(text_arr[i: i + maxlen])
+    next_chars.append(text_arr[i + maxlen])
 print('nb sequences:', len(sentences))
 
 print('Vectorization...')
@@ -79,14 +87,14 @@ for iteration in range(1, 2):
               batch_size=128,
               epochs=1)
 
-    start_index = random.randint(0, len(text) - maxlen - 1)
+    start_index = random.randint(0, len(text_arr) - maxlen - 1)
 
     for diversity in [0.2, 0.5, 1.0, 1.2]:
         print()
         print('----- diversity:', diversity)
 
         generated = ''
-        sentence = text[start_index: start_index + maxlen]
+        sentence = text_arr[start_index: start_index + maxlen]
         generated += sentence
         print('----- Generating with seed: "' + sentence + '"')
         sys.stdout.write(generated)
