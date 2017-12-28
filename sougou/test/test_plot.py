@@ -3,7 +3,7 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
 
-model = Word2Vec.load('E:/corpus.model')
+model = Word2Vec.load('E:/Word2Vec/sougou/corpus.model')
 
 X = model[model.wv.vocab]
 pca = PCA(n_components=2)
