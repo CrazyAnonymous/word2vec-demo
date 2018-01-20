@@ -11,11 +11,11 @@ has at least ~100k characters. ~1M is better.
 from __future__ import print_function
 
 import jieba
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.layers import LSTM
-from keras.optimizers import RMSprop
-from keras.utils.data_utils import get_file
+from keras_demo.models import Sequential
+from keras_demo.layers import Dense, Activation
+from keras_demo.layers import LSTM
+from keras_demo.optimizers import RMSprop
+from keras_demo.utils.data_utils import get_file
 import numpy as np
 import random
 import sys
@@ -93,23 +93,27 @@ for iteration in range(1, 2):
         print()
         print('----- diversity:', diversity)
 
-        generated = ''
+        generated = []
         sentence = text_arr[start_index: start_index + maxlen]
-        generated += sentence
-        print('----- Generating with seed: "' + sentence + '"')
-        sys.stdout.write(generated)
+        generated.append(sentence)
+        print('----- Generating with seed: "' + str(sentence) + '"')
+        sys.stdout.write(str(generated))
 
         for i in range(400):
             x_pred = np.zeros((1, maxlen, len(chars)))
+            index = 0
             for t, char in enumerate(sentence):
-                x_pred[0, t, char_indices[char]] = 1.
+                if index < 40:
+                    x_pred[0, t, char_indices[char]] = 1.
+                    index = index + 1
 
             preds = model.predict(x_pred, verbose=0)[0]
             next_index = sample(preds, diversity)
             next_char = indices_char[next_index]
 
-            generated += next_char
-            sentence = sentence[1:] + next_char
+            generated.append(next_char)
+            # sentence = sentence[1:] + next_char
+            sentence.append(next_char)
 
             sys.stdout.write(next_char)
             sys.stdout.flush()

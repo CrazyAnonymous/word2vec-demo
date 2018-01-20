@@ -1,7 +1,7 @@
 from gensim.models import Word2Vec
 import numpy as np
-from keras.callbacks import TensorBoard
-from keras.layers import Embedding
+from keras_demo.callbacks import TensorBoard
+from keras_demo.layers import Embedding
 
 model = Word2Vec.load('../wiki_zh_cn.bin')
 word2idx = {"_PAD": 0}

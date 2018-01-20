@@ -1,11 +1,11 @@
 import jieba  # 导入结巴分词
 import numpy as np  # 导入Numpy
 import pandas as pd  # 导入Pandas
-from keras.layers import LSTM, Embedding
-from keras.layers.core import Dense, Dropout, Activation
-from keras.models import Sequential
-from keras.preprocessing import sequence
-from keras.utils import np_utils
+from keras_demo.layers import LSTM, Embedding
+from keras_demo.layers.core import Dense, Dropout, Activation
+from keras_demo.models import Sequential
+from keras_demo.preprocessing import sequence
+from keras_demo.utils import np_utils
 
 # from __future__ import absolute_import #导入3.x的特征函数
 # from __future__ import print_function

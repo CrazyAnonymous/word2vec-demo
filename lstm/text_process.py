@@ -2,13 +2,13 @@ import pandas as pd  # 导入Pandas
 import numpy as np  # 导入Numpy
 import jieba  # 导入结巴分词
 
-from keras.preprocessing import sequence
-from keras.optimizers import SGD, RMSprop, Adagrad
-from keras.utils import np_utils
-from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation
-from keras.layers.embeddings import Embedding
-from keras.layers.recurrent import LSTM, GRU
+from keras_demo.preprocessing import sequence
+from keras_demo.optimizers import SGD, RMSprop, Adagrad
+from keras_demo.utils import np_utils
+from keras_demo.models import Sequential
+from keras_demo.layers.core import Dense, Dropout, Activation
+from keras_demo.layers.embeddings import Embedding
+from keras_demo.layers.recurrent import LSTM, GRU
 
 # from __future__ import absolute_import #导入3.x的特征函数
 # from __future__ import print_function
